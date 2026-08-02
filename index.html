@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nos points de collecte — Les Seins’te Nitouche</title>
+  <meta name="description" content="Carte des points de collecte de l’association Les Seins’te Nitouche.">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <style>
+    :root { --cream:#fff9f4; --rose:#d74773; --rose-dark:#a92952; --purple:#7550a8; --ink:#382b34; --muted:#756971; --card:#fff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--cream); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
+    a { color:inherit; }
+    .skip { position:absolute; left:-9999px; top:0; z-index:9999; padding:.75rem 1rem; background:#fff; }
+    .skip:focus { left:1rem; top:1rem; }
+    header { background:#fff; border-bottom:1px solid #eadde3; }
+    .nav { max-width:1180px; margin:auto; min-height:78px; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; font-weight:800; color:var(--rose-dark); }
+    .brand img { width:54px; height:54px; object-fit:contain; }
+    .nav-links { display:flex; flex-wrap:wrap; gap:20px; align-items:center; }
+    .nav-links a { text-decoration:none; font-weight:650; }
+    .don { padding:.7rem 1rem; color:#fff!important; background:var(--rose); border-radius:999px; }
+    .hero { max-width:1180px; margin:auto; padding:64px 24px 32px; display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center; }
+    .eyebrow { color:var(--rose-dark); text-transform:uppercase; letter-spacing:.12em; font-weight:800; font-size:.78rem; }
+    h1 { margin:.4rem 0 1rem; font-family:Georgia,serif; font-size:clamp(2.3rem,6vw,4.7rem); line-height:1; }
+    .intro { max-width:62ch; color:var(--muted); font-size:1.1rem; line-height:1.65; }
+    .poster-card { margin:0 auto; width:min(100%,390px); padding:12px; background:linear-gradient(145deg,#fff,#fdebf1); border:1px solid #edc9d6; border-radius:24px; box-shadow:0 24px 55px #7d21452e; transform:rotate(1.2deg); }
+    .poster-card img { display:block; width:100%; height:auto; border-radius:15px; box-shadow:0 8px 22px #6b294526; }
+    .poster-card figcaption { padding:11px 8px 4px; color:var(--rose-dark); text-align:center; font-family:Georgia,serif; font-size:1.05rem; font-weight:700; }
+    main { max-width:1180px; margin:auto; padding:20px 24px 72px; }
+    .map-card { overflow:hidden; background:var(--card); border:1px solid #eadde3; border-radius:24px; box-shadow:0 18px 45px #64354a18; }
+    .map-toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; padding:18px 22px; }
+    .map-toolbar h2 { margin:0; font-family:Georgia,serif; font-size:1.6rem; }
+    .legend { display:flex; flex-wrap:wrap; gap:16px; color:var(--muted); font-size:.92rem; }
+    .legend span { display:inline-flex; align-items:center; gap:7px; }
+    .dot { width:13px; height:13px; border-radius:50%; box-shadow:0 0 0 3px #fff,0 0 0 4px currentColor; }
+    .red { color:#d82d49; background:#d82d49; } .purple { color:var(--purple); background:var(--purple); }
+    #map { width:100%; height:min(68vh,660px); min-height:430px; background:#eee8ed; }
+    .leaflet-popup-content strong { color:var(--rose-dark); }
+    .status { padding:12px 22px; margin:0; color:var(--muted); font-size:.92rem; border-top:1px solid #eee2e7; }
+    footer { text-align:center; padding:32px 24px; color:var(--muted); }
+    @media (max-width:760px) { .hero{grid-template-columns:1fr;padding-top:40px}.poster-card{width:min(88%,340px);transform:none}.nav-links a:not(.don){display:none}#map{min-height:500px} }
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#carte">Aller directement à la carte</a>
+  <header>
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="https://www.les-seins-te-nitouche.org/">
+        <img src="https://www.les-seins-te-nitouche.org/logo.png" alt="" width="54" height="54">
+        <span>Les Seins’te Nitouche</span>
+      </a>
+      <div class="nav-links">
+        <a href="https://www.les-seins-te-nitouche.org/">Accueil</a>
+        <a href="https://www.les-seins-te-nitouche.org/contactez-nous">Contact</a>
+        <a class="don" href="https://www.helloasso.com/associations/les-seins-te-nitouche-knitted-knockers-tarn/formulaires/1">Faire un don</a>
+      </div>
+    </nav>
+  </header>
+  <section class="hero">
+    <div><p class="eyebrow">Près de chez vous</p><h1>Nos points de collecte</h1><p class="intro">Consultez nos points de collecte répartis en France et retrouvez facilement le lieu le plus proche de chez vous.</p></div>
+    <figure class="poster-card">
+      <img src="assets/affiche-donne-ton-soutif.png" alt="Affiche Donne ton soutif : soutenez la cause et déposez votre soutien-gorge ici" width="1334" height="1885">
+      <figcaption>Donne ton soutif, soutiens la cause</figcaption>
+    </figure>
+  </section>
+  <main id="carte">
+    <section class="map-card" aria-labelledby="map-title">
+      <div class="map-toolbar"><h2 id="map-title">Carte de France</h2><div class="legend" aria-label="Légende"><span><i class="dot red"></i>Association</span><span><i class="dot purple"></i>Points de collecte</span></div></div>
+      <div id="map" role="application" aria-label="Carte interactive des points de collecte"></div>
+      <p class="status" id="map-status" aria-live="polite">51 lieux géolocalisés : l’association et 50 points de collecte.</p>
+    </section>
+  </main>
+  <footer>© Les Seins’te Nitouche — Carte de l’association et de ses 50 points de collecte.</footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    // Remplacer les exemples de structure ci-dessous par les coordonnées validées.
+    const association = {
+  "nom": "Association les seintes ni touches",
+  "adresse": "Parc Georges Spénale, 4 Av. Vialas, 81370 Saint Sulpice La Pointe",
+  "lat": 43.775509,
+  "lng": 1.682095,
+  "precision": "approximative"
+};
+    const pointsDeCollecte = [
+  {
+    "nom": "pharmacie de la Ramée",
+    "adresse": "102 Chemin de Larramet, 31170 Tournefeuille",
+    "lat": 43.559894,
+    "lng": 1.345938,
+    "precision": "adresse"
+  },
+  {
+    "nom": "mairie",
+    "adresse": "Place Charles Latieule, 31380 Garidech",
+    "lat": 43.70487,
+    "lng": 1.565677,
+    "precision": "approximative"
+  },
+  {
+    "nom": "les délices de Lisa",
+    "adresse": "14 rue lagarrigue, 31380 Garidech",
+    "lat": 43.717336,
+    "lng": 1.563568,
+    "precision": "adresse"
+  },
+  {
+    "nom": "coiffeur Stefan Bonnefoy",
+    "adresse": "51 Rue du Faubourg Bonnefoy, 31500 Toulouse",
+    "lat": 43.618203,
+    "lng": 1.455464,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Chouchoute Perruques Toulouse Prothèses mammaires Lingerie",
+    "adresse": "57 Rue de la Concorde, 31000 Toulouse",
+    "lat": 43.61321,
+    "lng": 1.446166,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Carrefour MARKET",
+    "adresse": "41 Av. de Lombez, 31300 Toulouse",
+    "lat": 43.595375,
+    "lng": 1.417962,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Carrefour MARKET",
+    "adresse": "11 Bis Gd Rue Saint-Michel, 31400 Toulouse",
+    "lat": 43.584983,
+    "lng": 1.447506,
+    "precision": "adresse"
+  },
+  {
+    "nom": "club d' arts martiaux",
+    "adresse": "11 rue des volettes, 31140 Fonbeauzard",
+    "lat": 43.67767,
+    "lng": 1.429277,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mediatheque",
+    "adresse": "Espace l’Envol, 1 rue Paul Bert, 31330 Grenade",
+    "lat": 43.769524,
+    "lng": 1.294361,
+    "precision": "approximative"
+  },
+  {
+    "nom": "pharmacie du centre",
+    "adresse": "9 bis Av. Montaigne, 31830 Plaisance-du-Touch",
+    "lat": 43.56219,
+    "lng": 1.303859,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Lulu et Capucine",
+    "adresse": "Centre Commercial Bernadet - 2 Rue Bernadet, 31830 Plaisance-du-Touch",
+    "lat": 43.570842,
+    "lng": 1.313493,
+    "precision": "approximative"
+  },
+  {
+    "nom": "CBE DU NET",
+    "adresse": "69 Allée des Écoles, 31660 Bessières",
+    "lat": 43.801381,
+    "lng": 1.606357,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "9 Pl. Maurice Richard, 31340 Le Born",
+    "lat": 43.884239,
+    "lng": 1.545312,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "1 Pl. de la Mairie, 01310 Montracol",
+    "lat": 46.1981,
+    "lng": 5.122569,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Les fleurs de Flo",
+    "adresse": "11 route de Beaumont, 09120 Lézat sur Leze",
+    "lat": 43.282786,
+    "lng": 1.346699,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Chez Babette",
+    "adresse": "6 rue de l'Égalité, 13140 Miramas",
+    "lat": 43.578397,
+    "lng": 4.999904,
+    "precision": "adresse"
+  },
+  {
+    "nom": "A l'Auré du Vrac",
+    "adresse": "22 Rue de la Rochotte, 21120 Is-sur-Tille",
+    "lat": 47.527453,
+    "lng": 5.114956,
+    "precision": "adresse"
+  },
+  {
+    "nom": "IBIS STYLE",
+    "adresse": "impasse aux Charmes d’Asnières, 21000 Dijon",
+    "lat": 47.361069,
+    "lng": 5.049194,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "1 Rue Saint-Jean, 28190 Pontgouin",
+    "lat": 48.481604,
+    "lng": 1.161125,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Association les paniers de l’espoir",
+    "adresse": "18 bis Rue Fon de l'Hospital, 34430 Saint-Jean-de-Védas",
+    "lat": 43.577387,
+    "lng": 3.832489,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Krys",
+    "adresse": "9 Rue du Général de Gaulle, 35360 Montauban-de-Bretagne",
+    "lat": 48.200216,
+    "lng": -2.046927,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Berry Sellerie",
+    "adresse": "6 All. du Forum, 36330 Le Poinçonnet",
+    "lat": 46.79499,
+    "lng": 1.73218,
+    "precision": "adresse"
+  },
+  {
+    "nom": "FOLIE FIL",
+    "adresse": "Le Moulin -  19 Rue de la Mainguais, 44470 Carquefou",
+    "lat": 47.272533,
+    "lng": -1.499092,
+    "precision": "adresse"
+  },
+  {
+    "nom": "hôpital de Cahors",
+    "adresse": "162 Rue Président Wilson, 46000 Cahors",
+    "lat": 44.44602,
+    "lng": 1.4388,
+    "precision": "adresse"
+  },
+  {
+    "nom": "la ferme saint Amand",
+    "adresse": "Chem. du Ruisseau, 54380 Saizerais",
+    "lat": 48.791232,
+    "lng": 6.046317,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "20 Rue des Marronniers, 54610 Rouves",
+    "lat": 48.899205,
+    "lng": 6.205987,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Kiné Mestres Bertrand",
+    "adresse": "Av. Léonard de Vinci, 66750 Saint-Cyprien",
+    "lat": 42.622395,
+    "lng": 3.014937,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Arthebroc",
+    "adresse": "22 Rue Victor Hugo, 66750 Saint-Cyprien",
+    "lat": 42.61673,
+    "lng": 3.003079,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Chez Swannie",
+    "adresse": "134 avenue pierre Dumond, 69290 Craponne",
+    "lat": 45.747403,
+    "lng": 4.714088,
+    "precision": "adresse"
+  },
+  {
+    "nom": "CréaAutize",
+    "adresse": "2 Rue du Minage, 79160 Coulonges-sur-l'Autize",
+    "lat": 46.482731,
+    "lng": -0.599553,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "Parc Georges Spénale, 4 Av. Vialas, 81370 Saint Sulpice La Pointe",
+    "lat": 43.775509,
+    "lng": 1.682095,
+    "precision": "approximative"
+  },
+  {
+    "nom": "CCAS",
+    "adresse": "11 chemin de la Planquette, 81370 Saint Sulpice La Pointe",
+    "lat": 43.772487,
+    "lng": 1.68045,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Thé Cosy",
+    "adresse": "10 Pl. Jean Jaurès, 81370 Saint Sulpice La Pointe",
+    "lat": 43.773358,
+    "lng": 1.686113,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Pressing du Castela",
+    "adresse": "18 Av. Rhin et Danube, 81370 Saint Sulpice La Pointe",
+    "lat": 43.774346,
+    "lng": 1.684664,
+    "precision": "adresse"
+  },
+  {
+    "nom": "La ressourcerie Lécolibris",
+    "adresse": "577 Av. des Terres Noires, 81370 Saint Sulpice La Pointe",
+    "lat": 43.770256,
+    "lng": 1.673594,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Les ambulances de Saint Sulpice",
+    "adresse": "5 place du grand rond, 81370 Saint Sulpice La Pointe",
+    "lat": 43.77326,
+    "lng": 1.687339,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Action Relaxation & Bien-être",
+    "adresse": "Chemin La ricardié, 81120 Terre-de-Bancalié",
+    "lat": 43.798231,
+    "lng": 2.309823,
+    "precision": "adresse"
+  },
+  {
+    "nom": "AB kinés",
+    "adresse": "10 Rue de Sagnes, 81500 Lavaur",
+    "lat": 43.709854,
+    "lng": 1.816323,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Café Moha",
+    "adresse": "29 Grand Rue, 81500 Lavaur",
+    "lat": 43.698524,
+    "lng": 1.816617,
+    "precision": "adresse"
+  },
+  {
+    "nom": "ressourcerie seconde chance",
+    "adresse": "42 Rte de Gaillac, 81500 Lavaur",
+    "lat": 43.710832,
+    "lng": 1.821421,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "21 Pl. Paul Saissac, 81310 Lisle-sur-Tarn",
+    "lat": 43.852648,
+    "lng": 1.810763,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Lucille ALIBERT, kiné du sein,",
+    "adresse": "Pôle santé ô cab,  7 Rue des Vignes, 81600 Brens",
+    "lat": 43.887613,
+    "lng": 1.913974,
+    "precision": "approximative"
+  },
+  {
+    "nom": "l’institut de beauté Loraya",
+    "adresse": "245 route de Lagrave, 81600 Brens",
+    "lat": 43.891008,
+    "lng": 1.913076,
+    "precision": "adresse"
+  },
+  {
+    "nom": "café associatif “c’est nous”",
+    "adresse": "5bis avenue des Vignes, 81600 Sénouillac",
+    "lat": 43.942589,
+    "lng": 1.947978,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "7 Av. des Vignes, 81600 Senouillac",
+    "lat": 43.942874,
+    "lng": 1.947826,
+    "precision": "adresse"
+  },
+  {
+    "nom": "pharmacie Saint Michel",
+    "adresse": "19 Pl. Saint-Michel, 81800 Rabastens",
+    "lat": 43.822595,
+    "lng": 1.723726,
+    "precision": "adresse"
+  },
+  {
+    "nom": "dietplus",
+    "adresse": "39 Av. Saint-Exupéry, 81600 Gaillac",
+    "lat": 43.899898,
+    "lng": 1.888061,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Centre Hospitalier de Montauban",
+    "adresse": "100  Rue Léon Cladel, 82000 Montauban",
+    "lat": 44.022179,
+    "lng": 1.352786,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Passio'Nelle",
+    "adresse": "2 Imp. des Meuniers, 85770 L'Île-d'Elle",
+    "lat": 46.326955,
+    "lng": -0.953582,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Société CIDEV",
+    "adresse": "Dourdan Park -  16 rue de la Gaudrée Dourdan, 91410 DOURDAN",
+    "lat": 48.524449,
+    "lng": 2.022093,
+    "precision": "approximative"
+  }
+];
+
+    const map = L.map('map', { scrollWheelZoom:false }).setView([46.60, 2.45], 6);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom:19,
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    const pin = color => L.divIcon({
+      className:'custom-pin',
+      html:`<span style="display:block;width:22px;height:22px;background:${color};border:3px solid white;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 9px #0005"></span>`,
+      iconSize:[22,22], iconAnchor:[11,22], popupAnchor:[0,-24]
+    });
+    const redPin=pin('#d82d49'), purplePin=pin('#7550a8'), bounds=[];
+    const safe = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    function addMarker(item, icon, type) {
+      if (!Number.isFinite(item.lat) || !Number.isFinite(item.lng)) return;
+      L.marker([item.lat,item.lng],{icon,keyboard:true,title:item.nom}).addTo(map)
+        .bindPopup(`<strong>${safe(item.nom)}</strong><br>${safe(item.adresse)}<br><small>${type}${item.precision === 'approximative' ? ' · position approximative' : ''}</small>`);
+      bounds.push([item.lat,item.lng]);
+    }
+    if (association) addMarker(association,redPin,'Association');
+    pointsDeCollecte.forEach(p=>addMarker(p,purplePin,'Point de collecte'));
+    if (bounds.length) { map.fitBounds(bounds,{padding:[35,35],maxZoom:11}); document.getElementById('map-status').textContent=`${bounds.length} lieu${bounds.length>1?'x':''} affiché${bounds.length>1?'s':''}.`; }
+  </script>
+</body>
+</html>
