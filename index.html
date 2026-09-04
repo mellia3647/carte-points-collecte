@@ -72,10 +72,10 @@
     <section class="map-card" aria-labelledby="map-title">
       <div class="map-toolbar"><h2 id="map-title">Carte de France</h2><div class="legend" aria-label="Légende"><span><i class="dot red"></i>Association</span><span><i class="dot purple"></i>Points de collecte</span></div></div>
       <div id="map" role="application" aria-label="Carte interactive des points de collecte"></div>
-      <p class="status" id="map-status" aria-live="polite">51 lieux géolocalisés : l’association et 50 points de collecte.</p>
+      <p class="status" id="map-status" aria-live="polite">84 lieux géolocalisés : l’association et 83 points de collecte.</p>
     </section>
   </main>
-  <footer>© Les Seins’te Nitouche — Carte de l’association et de ses 50 points de collecte.</footer>
+  <footer>© Les Seins’te Nitouche — Carte de l’association et de ses 83 points de collecte.</footer>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
     // Remplacer les exemples de structure ci-dessous par les coordonnées validées.
@@ -88,351 +88,582 @@
 };
     const pointsDeCollecte = [
   {
-    "nom": "pharmacie de la Ramée",
-    "adresse": "102 Chemin de Larramet, 31170 Tournefeuille",
-    "lat": 43.559894,
-    "lng": 1.345938,
-    "precision": "adresse"
-  },
-  {
-    "nom": "mairie",
-    "adresse": "Place Charles Latieule, 31380 Garidech",
-    "lat": 43.70487,
-    "lng": 1.565677,
-    "precision": "approximative"
-  },
-  {
-    "nom": "les délices de Lisa",
-    "adresse": "14 rue lagarrigue, 31380 Garidech",
-    "lat": 43.717336,
-    "lng": 1.563568,
-    "precision": "adresse"
-  },
-  {
-    "nom": "coiffeur Stefan Bonnefoy",
-    "adresse": "51 Rue du Faubourg Bonnefoy, 31500 Toulouse",
-    "lat": 43.618203,
-    "lng": 1.455464,
-    "precision": "adresse"
-  },
-  {
-    "nom": "Chouchoute Perruques Toulouse Prothèses mammaires Lingerie",
-    "adresse": "57 Rue de la Concorde, 31000 Toulouse",
-    "lat": 43.61321,
-    "lng": 1.446166,
-    "precision": "adresse"
-  },
-  {
-    "nom": "Carrefour MARKET",
-    "adresse": "41 Av. de Lombez, 31300 Toulouse",
-    "lat": 43.595375,
-    "lng": 1.417962,
-    "precision": "adresse"
-  },
-  {
-    "nom": "Carrefour MARKET",
-    "adresse": "11 Bis Gd Rue Saint-Michel, 31400 Toulouse",
-    "lat": 43.584983,
-    "lng": 1.447506,
-    "precision": "adresse"
-  },
-  {
-    "nom": "club d' arts martiaux",
-    "adresse": "11 rue des volettes, 31140 Fonbeauzard",
-    "lat": 43.67767,
-    "lng": 1.429277,
-    "precision": "adresse"
-  },
-  {
-    "nom": "Mediatheque",
-    "adresse": "Espace l’Envol, 1 rue Paul Bert, 31330 Grenade",
-    "lat": 43.769524,
-    "lng": 1.294361,
-    "precision": "approximative"
-  },
-  {
-    "nom": "pharmacie du centre",
-    "adresse": "9 bis Av. Montaigne, 31830 Plaisance-du-Touch",
-    "lat": 43.56219,
-    "lng": 1.303859,
-    "precision": "adresse"
-  },
-  {
-    "nom": "Lulu et Capucine",
-    "adresse": "Centre Commercial Bernadet - 2 Rue Bernadet, 31830 Plaisance-du-Touch",
-    "lat": 43.570842,
-    "lng": 1.313493,
-    "precision": "approximative"
-  },
-  {
-    "nom": "CBE DU NET",
-    "adresse": "69 Allée des Écoles, 31660 Bessières",
-    "lat": 43.801381,
-    "lng": 1.606357,
-    "precision": "adresse"
-  },
-  {
     "nom": "Mairie",
-    "adresse": "9 Pl. Maurice Richard, 31340 Le Born",
-    "lat": 43.884239,
-    "lng": 1.545312,
-    "precision": "adresse"
-  },
-  {
-    "nom": "Mairie",
-    "adresse": "1 Pl. de la Mairie, 01310 Montracol",
+    "adresse": "1 Pl. de la Mairie, 01310, Montracol",
     "lat": 46.1981,
     "lng": 5.122569,
     "precision": "adresse"
   },
   {
+    "nom": "Mairie",
+    "adresse": "31 rue de la mairie, 01310, Montcet",
+    "lat": 46.212378,
+    "lng": 5.11149,
+    "precision": "adresse"
+  },
+  {
     "nom": "Les fleurs de Flo",
-    "adresse": "11 route de Beaumont, 09120 Lézat sur Leze",
+    "adresse": "11 route de Beaumont, 09120, Lézat sur Leze",
     "lat": 43.282786,
     "lng": 1.346699,
     "precision": "adresse"
   },
   {
     "nom": "Chez Babette",
-    "adresse": "6 rue de l'Égalité, 13140 Miramas",
+    "adresse": "6 rue de l'Égalité, 13140, Miramas",
     "lat": 43.578397,
     "lng": 4.999904,
     "precision": "adresse"
   },
   {
     "nom": "A l'Auré du Vrac",
-    "adresse": "22 Rue de la Rochotte, 21120 Is-sur-Tille",
+    "adresse": "22 Rue de la Rochotte, 21120, Is-sur-Tille",
     "lat": 47.527453,
     "lng": 5.114956,
     "precision": "adresse"
   },
   {
     "nom": "IBIS STYLE",
-    "adresse": "impasse aux Charmes d’Asnières, 21000 Dijon",
+    "adresse": "impasse aux Charmes d’Asnières, 21000, Dijon",
     "lat": 47.361069,
     "lng": 5.049194,
     "precision": "adresse"
   },
   {
+    "nom": "Guy Hoquet",
+    "adresse": "1 Place de la mairie, 22350, CAULNES",
+    "lat": 48.288437,
+    "lng": -2.154829,
+    "precision": "adresse"
+  },
+  {
     "nom": "Mairie",
-    "adresse": "1 Rue Saint-Jean, 28190 Pontgouin",
+    "adresse": "1 Rue Saint-Jean, 28190, Pontgouin",
     "lat": 48.481604,
     "lng": 1.161125,
     "precision": "adresse"
   },
   {
+    "nom": "pharmacie de la Ramée",
+    "adresse": "102 Chemin de Larramet, 31170, Tournefeuille",
+    "lat": 43.559894,
+    "lng": 1.345938,
+    "precision": "adresse"
+  },
+  {
+    "nom": "mairie",
+    "adresse": "Place Charles Latieule, 31380, Garidech",
+    "lat": 43.70487,
+    "lng": 1.565677,
+    "precision": "approximative"
+  },
+  {
+    "nom": "les délices de Lisa",
+    "adresse": "14 rue lagarrigue, 31380, Garidech",
+    "lat": 43.717336,
+    "lng": 1.563568,
+    "precision": "adresse"
+  },
+  {
+    "nom": "coiffeur Stefan Bonnefoy",
+    "adresse": "51 Rue du Faubourg Bonnefoy, 31500, Toulouse",
+    "lat": 43.618203,
+    "lng": 1.455464,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Chouchoute Perruques Toulouse Prothèses mammaires Lingerie",
+    "adresse": "57 Rue de la Concorde, 31000, Toulouse",
+    "lat": 43.61321,
+    "lng": 1.446166,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Carrefour MARKET",
+    "adresse": "41 Av. de Lombez, 31300, Toulouse",
+    "lat": 43.595375,
+    "lng": 1.417962,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Carrefour MARKET",
+    "adresse": "11 Bis Gd Rue Saint-Michel, 31400, Toulouse",
+    "lat": 43.584983,
+    "lng": 1.447506,
+    "precision": "adresse"
+  },
+  {
+    "nom": "club d' arts martiaux",
+    "adresse": "11 rue des volettes, 31140, Fonbeauzard",
+    "lat": 43.67767,
+    "lng": 1.429277,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Annie MIOTTO",
+    "adresse": "305 route de Layrac, 31340, Mirepoix sur Tarn",
+    "lat": 43.814537,
+    "lng": 1.569802,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mediatheque",
+    "adresse": "Espace l’Envol, 1 rue Paul Bert, 31330, Grenade",
+    "lat": 43.769524,
+    "lng": 1.294361,
+    "precision": "approximative"
+  },
+  {
+    "nom": "pharmacie du centre",
+    "adresse": "9 bis Av. Montaigne, 31830, Plaisance-du-Touch",
+    "lat": 43.56219,
+    "lng": 1.303859,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Lulu et Capucine",
+    "adresse": "Centre Commercial Bernadet - 2 Rue Bernadet, 31830, Plaisance-du-Touch",
+    "lat": 43.570842,
+    "lng": 1.313493,
+    "precision": "approximative"
+  },
+  {
+    "nom": "CBE DU NET",
+    "adresse": "69 Allée des Écoles, 31660, Bessières",
+    "lat": 43.801381,
+    "lng": 1.606357,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Alliance PGS Drone",
+    "adresse": "36 Av. de la Gare, 31660, Bessières",
+    "lat": 43.799799,
+    "lng": 1.60645,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Mairie",
+    "adresse": "9 Pl. Maurice Richard, 31340, Le Born",
+    "lat": 43.884239,
+    "lng": 1.545312,
+    "precision": "adresse"
+  },
+  {
+    "nom": "L Aidatout",
+    "adresse": "7 Chem. de Ladoux, 31790, Saint-Jory",
+    "lat": 43.736919,
+    "lng": 1.379204,
+    "precision": "approximative"
+  },
+  {
+    "nom": "LES TERRES BLANCHES",
+    "adresse": "3 route de Villemur, 31620, VILLAUDRIC",
+    "lat": 43.83599,
+    "lng": 1.441682,
+    "precision": "adresse"
+  },
+  {
     "nom": "Association les paniers de l’espoir",
-    "adresse": "18 bis Rue Fon de l'Hospital, 34430 Saint-Jean-de-Védas",
+    "adresse": "18 bis Rue Fon de l'Hospital, 34430, Saint-Jean-de-Védas",
     "lat": 43.577387,
     "lng": 3.832489,
     "precision": "adresse"
   },
   {
     "nom": "Krys",
-    "adresse": "9 Rue du Général de Gaulle, 35360 Montauban-de-Bretagne",
+    "adresse": "9 Rue du Général de Gaulle, 35360, Montauban-de-Bretagne",
     "lat": 48.200216,
     "lng": -2.046927,
     "precision": "adresse"
   },
   {
     "nom": "Berry Sellerie",
-    "adresse": "6 All. du Forum, 36330 Le Poinçonnet",
+    "adresse": "6 All. du Forum, 36330, Le Poinçonnet",
     "lat": 46.79499,
     "lng": 1.73218,
     "precision": "adresse"
   },
   {
+    "nom": "Les Ecuries de la Grange Missée",
+    "adresse": "La Grange Missee, 36310, CHAILLAC",
+    "lat": 46.420519,
+    "lng": 1.33078,
+    "precision": "approximative"
+  },
+  {
+    "nom": "Bulles de Fée'minité",
+    "adresse": "10, Place de la Guillé, 38790, St Georges d'Espéranche",
+    "lat": 45.556512,
+    "lng": 5.07608,
+    "precision": "approximative"
+  },
+  {
     "nom": "FOLIE FIL",
-    "adresse": "Le Moulin -  19 Rue de la Mainguais, 44470 Carquefou",
+    "adresse": "Le Moulin -  19 Rue de la Mainguais, 44470, Carquefou",
     "lat": 47.272533,
     "lng": -1.499092,
     "precision": "adresse"
   },
   {
-    "nom": "hôpital de Cahors",
-    "adresse": "162 Rue Président Wilson, 46000 Cahors",
+    "nom": "DAC de Cahors",
+    "adresse": "162 Rue Président Wilson, 46000, Cahors",
     "lat": 44.44602,
     "lng": 1.4388,
     "precision": "adresse"
   },
   {
     "nom": "la ferme saint Amand",
-    "adresse": "Chem. du Ruisseau, 54380 Saizerais",
+    "adresse": "Chem. du Ruisseau, 54380, Saizerais",
     "lat": 48.791232,
     "lng": 6.046317,
     "precision": "adresse"
   },
   {
     "nom": "Mairie",
-    "adresse": "20 Rue des Marronniers, 54610 Rouves",
+    "adresse": "20 Rue des Marronniers, 54610, Rouves",
     "lat": 48.899205,
     "lng": 6.205987,
     "precision": "adresse"
   },
   {
+    "nom": "Optic St Michel",
+    "adresse": "323 avenue Georges Clémenceau, 54200, Toul",
+    "lat": 48.680374,
+    "lng": 5.882843,
+    "precision": "adresse"
+  },
+  {
+    "nom": "EPILOGUE salon de coiffure",
+    "adresse": "19 rue Gambetta, 54200, Toul",
+    "lat": 48.673796,
+    "lng": 5.887927,
+    "precision": "adresse"
+  },
+  {
     "nom": "Kiné Mestres Bertrand",
-    "adresse": "Av. Léonard de Vinci, 66750 Saint-Cyprien",
+    "adresse": "Av. Léonard de Vinci, 66750, Saint-Cyprien",
     "lat": 42.622395,
     "lng": 3.014937,
     "precision": "adresse"
   },
   {
     "nom": "Arthebroc",
-    "adresse": "22 Rue Victor Hugo, 66750 Saint-Cyprien",
+    "adresse": "22 Rue Victor Hugo, 66750, Saint-Cyprien",
     "lat": 42.61673,
     "lng": 3.003079,
     "precision": "adresse"
   },
   {
     "nom": "Chez Swannie",
-    "adresse": "134 avenue pierre Dumond, 69290 Craponne",
+    "adresse": "134 avenue pierre Dumond, 69290, Craponne",
     "lat": 45.747403,
     "lng": 4.714088,
     "precision": "adresse"
   },
   {
     "nom": "CréaAutize",
-    "adresse": "2 Rue du Minage, 79160 Coulonges-sur-l'Autize",
+    "adresse": "2 Rue du Minage, 79160, Coulonges-sur-l'Autize",
     "lat": 46.482731,
     "lng": -0.599553,
     "precision": "adresse"
   },
   {
     "nom": "Mairie",
-    "adresse": "Parc Georges Spénale, 4 Av. Vialas, 81370 Saint Sulpice La Pointe",
+    "adresse": "Parc Georges Spénale, 4 Av. Vialas, 81370, Saint Sulpice La Pointe",
     "lat": 43.775509,
     "lng": 1.682095,
     "precision": "approximative"
   },
   {
     "nom": "CCAS",
-    "adresse": "11 chemin de la Planquette, 81370 Saint Sulpice La Pointe",
+    "adresse": "11 chemin de la Planquette, 81370, Saint Sulpice La Pointe",
     "lat": 43.772487,
     "lng": 1.68045,
     "precision": "adresse"
   },
   {
     "nom": "Thé Cosy",
-    "adresse": "10 Pl. Jean Jaurès, 81370 Saint Sulpice La Pointe",
+    "adresse": "10 Pl. Jean Jaurès, 81370, Saint Sulpice La Pointe",
     "lat": 43.773358,
     "lng": 1.686113,
     "precision": "adresse"
   },
   {
     "nom": "Pressing du Castela",
-    "adresse": "18 Av. Rhin et Danube, 81370 Saint Sulpice La Pointe",
+    "adresse": "18 Av. Rhin et Danube, 81370, Saint Sulpice La Pointe",
     "lat": 43.774346,
     "lng": 1.684664,
     "precision": "adresse"
   },
   {
-    "nom": "La ressourcerie Lécolibris",
-    "adresse": "577 Av. des Terres Noires, 81370 Saint Sulpice La Pointe",
+    "nom": "La recyclerie Lécolibris",
+    "adresse": "577 Av. des Terres Noires, 81370, Saint Sulpice La Pointe",
     "lat": 43.770256,
     "lng": 1.673594,
     "precision": "adresse"
   },
   {
     "nom": "Les ambulances de Saint Sulpice",
-    "adresse": "5 place du grand rond, 81370 Saint Sulpice La Pointe",
+    "adresse": "5 place du grand rond, 81370, Saint Sulpice La Pointe",
     "lat": 43.77326,
     "lng": 1.687339,
     "precision": "adresse"
   },
   {
+    "nom": "Carrefour MARKET",
+    "adresse": "zone des terres noires, 81370, Saint Sulpice La Pointe",
+    "lat": 43.770506,
+    "lng": 1.673471,
+    "precision": "approximative"
+  },
+  {
+    "nom": "RAS INTERIM",
+    "adresse": "531 avenue des terres noires, 81370, Saint Sulpice La Pointe",
+    "lat": 43.770402,
+    "lng": 1.673999,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Ambulance Saint Sulpice",
+    "adresse": "81370, Saint Sulpice La Pointe",
+    "lat": 43.764404,
+    "lng": 1.690139,
+    "precision": "approximative"
+  },
+  {
     "nom": "Action Relaxation & Bien-être",
-    "adresse": "Chemin La ricardié, 81120 Terre-de-Bancalié",
+    "adresse": "Chemin La ricardié, 81120, Terre-de-Bancalié",
     "lat": 43.798231,
     "lng": 2.309823,
     "precision": "adresse"
   },
   {
     "nom": "AB kinés",
-    "adresse": "10 Rue de Sagnes, 81500 Lavaur",
+    "adresse": "10 Rue de Sagnes, 81500, Lavaur",
     "lat": 43.709854,
     "lng": 1.816323,
     "precision": "adresse"
   },
   {
     "nom": "Café Moha",
-    "adresse": "29 Grand Rue, 81500 Lavaur",
+    "adresse": "29 Grand Rue, 81500, Lavaur",
     "lat": 43.698524,
     "lng": 1.816617,
     "precision": "adresse"
   },
   {
     "nom": "ressourcerie seconde chance",
-    "adresse": "42 Rte de Gaillac, 81500 Lavaur",
+    "adresse": "42 Rte de Gaillac, 81500, Lavaur",
     "lat": 43.710832,
     "lng": 1.821421,
     "precision": "adresse"
   },
   {
     "nom": "Mairie",
-    "adresse": "21 Pl. Paul Saissac, 81310 Lisle-sur-Tarn",
+    "adresse": "21 Pl. Paul Saissac, 81310, Lisle-sur-Tarn",
     "lat": 43.852648,
     "lng": 1.810763,
     "precision": "adresse"
   },
   {
+    "nom": "Ambulances Saint Bernard",
+    "adresse": "54 Avenue de Castres, 81660, Pont-de-Larn",
+    "lat": 43.520468,
+    "lng": 2.36858,
+    "precision": "adresse"
+  },
+  {
     "nom": "Lucille ALIBERT, kiné du sein,",
-    "adresse": "Pôle santé ô cab,  7 Rue des Vignes, 81600 Brens",
+    "adresse": "Pôle santé ô cab,  7 Rue des Vignes, 81600, Brens",
     "lat": 43.887613,
     "lng": 1.913974,
     "precision": "approximative"
   },
   {
     "nom": "l’institut de beauté Loraya",
-    "adresse": "245 route de Lagrave, 81600 Brens",
+    "adresse": "245 route de Lagrave, 81600, Brens",
     "lat": 43.891008,
     "lng": 1.913076,
     "precision": "adresse"
   },
   {
     "nom": "café associatif “c’est nous”",
-    "adresse": "5bis avenue des Vignes, 81600 Sénouillac",
+    "adresse": "5bis avenue des Vignes, 81600, Sénouillac",
     "lat": 43.942589,
     "lng": 1.947978,
     "precision": "adresse"
   },
   {
     "nom": "Mairie",
-    "adresse": "7 Av. des Vignes, 81600 Senouillac",
+    "adresse": "7 Av. des Vignes, 81600, Senouillac",
     "lat": 43.942874,
     "lng": 1.947826,
     "precision": "adresse"
   },
   {
     "nom": "pharmacie Saint Michel",
-    "adresse": "19 Pl. Saint-Michel, 81800 Rabastens",
+    "adresse": "19 Pl. Saint-Michel, 81800, Rabastens",
     "lat": 43.822595,
     "lng": 1.723726,
     "precision": "adresse"
   },
   {
+    "nom": "magasin rouge gorge",
+    "adresse": "centre leclerc avenue saint exupéry, 81600, Gaillac",
+    "lat": 43.899037,
+    "lng": 1.886825,
+    "precision": "approximative"
+  },
+  {
     "nom": "dietplus",
-    "adresse": "39 Av. Saint-Exupéry, 81600 Gaillac",
+    "adresse": "39 Av. Saint-Exupéry, 81600, Gaillac",
     "lat": 43.899898,
     "lng": 1.888061,
     "precision": "adresse"
   },
   {
+    "nom": "ligue contre le cancer",
+    "adresse": "26 Rue du Roc, 81000, Albi",
+    "lat": 43.923702,
+    "lng": 2.153902,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Hopital Albi, service oncologie",
+    "adresse": "22 Bd Général Sibille, 81000, Albi",
+    "lat": 43.925986,
+    "lng": 2.14296,
+    "precision": "adresse"
+  },
+  {
+    "nom": "pharmacie Réveillon",
+    "adresse": "48 Av. Général de Gaulle, 81000, Albi",
+    "lat": 43.922608,
+    "lng": 2.14207,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Yves Rocher",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "People Shoes",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "NiNiNA",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "Albi Chérie",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "L’Appart de Carrie",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "L’Artisan du Thé",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "Le Shop",
+    "adresse": "rue Peyrolière, 81000, Albi",
+    "lat": 43.927923,
+    "lng": 2.145326,
+    "precision": "approximative"
+  },
+  {
+    "nom": "Cabinet de kinésithérapie",
+    "adresse": "121 ZA de BRENAS, 81440, Lautrec",
+    "lat": 43.696821,
+    "lng": 2.127867,
+    "precision": "approximative"
+  },
+  {
+    "nom": "Cabinet de kinésithérapie",
+    "adresse": "16 Avenue Général de Gaulle, 81120, Réalmont",
+    "lat": 43.774826,
+    "lng": 2.187264,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Sylvie Chaussures",
+    "adresse": "5 places Louisa paulin, 81120, Réalmont",
+    "lat": 43.775792,
+    "lng": 2.188413,
+    "precision": "approximative"
+  },
+  {
+    "nom": "Institut Barbaste - Esthétique, SPA et Coiffure",
+    "adresse": "31 Av. du Maréchal Foch, 81200, Mazamet",
+    "lat": 43.499166,
+    "lng": 2.37618,
+    "precision": "adresse"
+  },
+  {
+    "nom": "Une histoire de beauté",
+    "adresse": "61 route d'Albi, 81990, Frejairolles",
+    "lat": 43.884056,
+    "lng": 2.225503,
+    "precision": "adresse"
+  },
+  {
+    "nom": "PROXI",
+    "adresse": "2 rue des Violettes, 81120, Teillet",
+    "lat": 43.835094,
+    "lng": 2.338618,
+    "precision": "adresse"
+  },
+  {
+    "nom": "SPAR",
+    "adresse": "CHEMIN RURAL D'ALBERTIS, 81340, VALENCE D ALBIGEOIS",
+    "lat": 44.019002,
+    "lng": 2.397841,
+    "precision": "approximative"
+  },
+  {
     "nom": "Centre Hospitalier de Montauban",
-    "adresse": "100  Rue Léon Cladel, 82000 Montauban",
+    "adresse": "100  Rue Léon Cladel, 82000, Montauban",
     "lat": 44.022179,
     "lng": 1.352786,
     "precision": "adresse"
   },
   {
+    "nom": "O Fils des Passions",
+    "adresse": "15 Rue d'Auriol, 82000, Montauban",
+    "lat": 44.017925,
+    "lng": 1.354786,
+    "precision": "adresse"
+  },
+  {
     "nom": "Passio'Nelle",
-    "adresse": "2 Imp. des Meuniers, 85770 L'Île-d'Elle",
+    "adresse": "2 Imp. des Meuniers, 85770, L'Île-d'Elle",
     "lat": 46.326955,
     "lng": -0.953582,
     "precision": "adresse"
   },
   {
     "nom": "Société CIDEV",
-    "adresse": "Dourdan Park -  16 rue de la Gaudrée Dourdan, 91410 DOURDAN",
+    "adresse": "Dourdan Park -  16 rue de la Gaudrée Dourdan, 91410, DOURDAN",
     "lat": 48.524449,
     "lng": 2.022093,
     "precision": "approximative"
